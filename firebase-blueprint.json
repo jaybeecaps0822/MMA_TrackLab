@@ -1,0 +1,139 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "User's full name" },
+        "email": { "type": "string", "format": "email", "description": "User's email" },
+        "role": { "type": "string", "enum": ["student", "teacher", "admin"], "description": "User role" },
+        "lastActive": { "type": "string", "format": "date-time", "description": "Last time user was active" }
+      },
+      "required": ["uid", "displayName", "email", "role"]
+    },
+    "LabUsage": {
+      "title": "Lab Usage Record",
+      "description": "Tracks a single session of lab usage.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user" },
+        "userName": { "type": "string", "description": "Name of the user" },
+        "checkIn": { "type": "string", "format": "date-time", "description": "Check-in time" },
+        "checkOut": { "type": "string", "format": "date-time", "description": "Check-out time (null if active)" },
+        "purpose": { "type": "string", "description": "Purpose of lab use" },
+        "station": { "type": "string", "description": "Computer station number used" }
+      },
+      "required": ["uid", "userName", "checkIn", "purpose"]
+    },
+    "Schedule": {
+      "title": "Lab Schedule",
+      "description": "Planned lab sessions for classes.",
+      "type": "object",
+      "properties": {
+        "labId": { "type": "string", "description": "ID of the laboratory" },
+        "day": { "type": "string", "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "description": "Day of the week" },
+        "date": { "type": "string", "format": "date", "description": "Specific date (optional)" },
+        "startTime": { "type": "string", "description": "Start time (e.g., 08:00)" },
+        "endTime": { "type": "string", "description": "End time (e.g., 10:00)" },
+        "teacherName": { "type": "string", "description": "Teacher in charge" },
+        "subject": { "type": "string", "description": "Subject name" },
+        "yearSection": { "type": "string", "description": "Year and Section (e.g., Grade 12 - ICT A)" },
+        "trainerId": { "type": "string", "description": "Optional ID of assigned trainer/faculty" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["labId", "day", "startTime", "endTime", "teacherName", "subject", "yearSection"]
+    },
+    "Laboratory": {
+      "title": "Laboratory",
+      "description": "Stores laboratory names, descriptions, and workstation capacities.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the laboratory" },
+        "description": { "type": "string", "description": "Description of the laboratory" },
+        "capacity": { "type": "number", "description": "Workstation seat capacity" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "Trainer": {
+      "title": "Faculty Member / Trainer",
+      "description": "Stores faculty and laboratory instructor information.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the faculty member" },
+        "specialization": { "type": "string", "description": "Academic specialization or teaching focus" },
+        "photoUrl": { "type": "string", "description": "Photo identification URL or base64 image data" },
+        "email": { "type": "string", "format": "email", "description": "Institutional email address" },
+        "employeeId": { "type": "string", "description": "Employee ID or faculty code" },
+        "department": { "type": "string", "description": "Academic department" },
+        "phoneNumber": { "type": "string", "description": "Contact phone number" },
+        "status": { "type": "string", "enum": ["active", "on_leave", "adjunct"], "description": "Employment status" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "Section": {
+      "title": "Academic Section / Cohort",
+      "description": "Stores class sections, cohorts, and student groups.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Section name, e.g. Grade 12 - ICT A, BSIT 3-1" },
+        "yearLevel": { "type": "string", "description": "Grade or year level, e.g. Grade 11, Grade 12, 3rd Year" },
+        "department": { "type": "string", "description": "Department or track, e.g. ICT, Animation, CS" },
+        "studentCount": { "type": "number", "description": "Total enrolled student headcount" },
+        "adviser": { "type": "string", "description": "Faculty adviser name" },
+        "room": { "type": "string", "description": "Default homeroom or assigned laboratory" },
+        "notes": { "type": "string", "description": "Notes or class specifications" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "Subject": {
+      "title": "Subject / Curriculum Course",
+      "description": "Stores academic subjects, course titles, units, and categories.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Subject title, e.g. Multimedia Arts 101, Python Programming" },
+        "code": { "type": "string", "description": "Course code, e.g. MMA101, ICT204" },
+        "category": { "type": "string", "description": "Category or track, e.g. Digital Arts, Programming, Core ICT" },
+        "units": { "type": "number", "description": "Academic credits / units" },
+        "hoursPerWeek": { "type": "number", "description": "Contact or lab hours per week" },
+        "description": { "type": "string", "description": "Course syllabus summary" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "WorkstationIssue": {
+      "title": "Workstation Issue & Maintenance",
+      "description": "Tracks hardware or software faults and repairs on computer stations.",
+      "type": "object",
+      "properties": {
+        "labId": { "type": "string", "description": "Laboratory ID" },
+        "station": { "type": "string", "description": "Station number, e.g. PC-04" },
+        "category": { "type": "string", "enum": ["hardware", "software", "network", "peripheral", "other"], "description": "Type of fault" },
+        "description": { "type": "string", "description": "Details of the issue" },
+        "severity": { "type": "string", "enum": ["low", "medium", "critical"], "description": "Severity level" },
+        "reportedByUid": { "type": "string", "description": "UID of reporter" },
+        "reportedByName": { "type": "string", "description": "Name of reporter" },
+        "status": { "type": "string", "enum": ["open", "in_progress", "resolved"], "description": "Current status" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "resolvedAt": { "type": "string", "format": "date-time" },
+        "resolutionNotes": { "type": "string", "description": "Notes when resolved" },
+        "resolvedByName": { "type": "string", "description": "Name of technician or teacher who resolved" }
+      },
+      "required": ["labId", "station", "description", "reportedByUid", "reportedByName", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/lab_usage/{recordId}": { "schema": "LabUsage", "description": "Lab usage logs" },
+    "/schedules/{scheduleId}": { "schema": "Schedule", "description": "Lab schedules" },
+    "/laboratories/{labId}": { "schema": "Laboratory", "description": "Laboratory definitions" },
+    "/trainers/{trainerId}": { "schema": "Trainer", "description": "Trainer/Faculty definitions" },
+    "/sections/{sectionId}": { "schema": "Section", "description": "Academic section and cohort definitions" },
+    "/subjects/{subjectId}": { "schema": "Subject", "description": "Academic course and subject definitions" },
+    "/workstation_issues/{issueId}": { "schema": "WorkstationIssue", "description": "Workstation maintenance and fault reports" }
+  }
+}

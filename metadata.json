@@ -1,0 +1,5 @@
+{
+  "name": "Remix MMA ICT TrackLab",
+  "description": "A school laboratory usage and schedule tracking system to monitor who is using the lab and at what time.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+/* Custom scrollbars for data tables and horizontal grids */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* 
+ * ===================================================================
+ * MARY MEDIATRIX ACADEMY: WHITE & DEEP NAVY BLUE UNIFORM THEME SYSTEM
+ * Applied uniformly across all pages:
+ * - Dashboard (Floor Plan)
+ * - Class Timetable & Weekly Matrix
+ * - Live Attendance & Workstation Logs
+ * - Equipment & Borrowing Tracker
+ * - AC Usage & Energy In/Out Tracker
+ * - Workstation Maintenance & Repairs
+ * - Laboratories & Room Capacity
+ * - Faculty, Sections & Subjects
+ * - Utilization & Analytics
+ * - Audit Logs & Reports
+ * - User Roles & Access
+ * - Doorway Tablet Display Kiosk
+ * ===================================================================
+ */
+
+.theme-navy-white {
+  background-color: #F8FAFC !important;
+  color: #0A192F !important;
+}
+
+/* Base Body and Root when theme is active */
+body:has(.theme-navy-white),
+html:has(.theme-navy-white) {
+  background-color: #F8FAFC !important;
+  color: #0A192F !important;
+}
+
+/* Sidebar Uniform Styling */
+.theme-navy-white aside {
+  background-color: #0A192F !important;
+  border-color: #1E3A5F !important;
+}
+.theme-navy-white aside .bg-zinc-950,
+.theme-navy-white aside .bg-zinc-950\/95,
+.theme-navy-white aside .bg-[#071324] {
+  background-color: #071324 !important;
+  border-color: #1E3A5F !important;
+}
+.theme-navy-white aside .border-zinc-800,
+.theme-navy-white aside .border-zinc-800\/80,
+.theme-navy-white aside .border-\[\#1B3A60\] {
+  border-color: #1E3A5F !important;
+}
+.theme-navy-white aside .bg-zinc-800 {
+  background-color: #162C4E !important;
+  color: #FFFFFF !important;
+}
+.theme-navy-white aside .bg-zinc-900,
+.theme-navy-white aside .bg-zinc-900\/80,
+.theme-navy-white aside .bg-\[\#102442\] {
+  background-color: #0E223D !important;
+  border-color: #1E3A5F !important;
+}
+.theme-navy-white aside .hover\:bg-zinc-900\/80:hover,
+.theme-navy-white aside .hover\:bg-white\/10:hover {
+  background-color: #132744 !important;
+}
+
+/* Header Uniform Styling */
+.theme-navy-white header {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Headings and Typography Hierarchy */
+.theme-navy-white h1,
+.theme-navy-white h2,
+.theme-navy-white h3,
+.theme-navy-white h4,
+.theme-navy-white .text-zinc-900,
+.theme-navy-white .text-slate-900,
+.theme-navy-white .text-gray-900 {
+  color: #0A192F !important;
+}
+
+.theme-navy-white .text-zinc-700,
+.theme-navy-white .text-slate-700 {
+  color: #334155 !important;
+}
+
+.theme-navy-white .text-zinc-600,
+.theme-navy-white .text-slate-600 {
+  color: #475569 !important;
+}
+
+.theme-navy-white .text-zinc-500,
+.theme-navy-white .text-slate-500 {
+  color: #64748B !important;
+}
+
+.theme-navy-white .text-zinc-400,
+.theme-navy-white .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+/* Card & Surface Uniformity */
+.theme-navy-white .bg-white {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+.theme-navy-white .bg-zinc-50,
+.theme-navy-white .bg-slate-50 {
+  background-color: #F8FAFC !important;
+}
+
+.theme-navy-white .bg-zinc-100,
+.theme-navy-white .bg-slate-100 {
+  background-color: #F1F5F9 !important;
+}
+
+.theme-navy-white .border-zinc-100,
+.theme-navy-white .border-slate-100 {
+  border-color: #F1F5F9 !important;
+}
+
+.theme-navy-white .border-zinc-200,
+.theme-navy-white .border-slate-200 {
+  border-color: #E2E8F0 !important;
+}
+
+.theme-navy-white .border-zinc-300,
+.theme-navy-white .border-slate-300 {
+  border-color: #CBD5E1 !important;
+}
+
+/* Primary Action Buttons across all pages (Solid Deep Navy) */
+.theme-navy-white .bg-zinc-900,
+.theme-navy-white .bg-slate-900,
+.theme-navy-white button.bg-zinc-900,
+.theme-navy-white button.bg-slate-900 {
+  background-color: #0A192F !important;
+  color: #FFFFFF !important;
+}
+
+.theme-navy-white .hover\:bg-zinc-800:hover,
+.theme-navy-white .hover\:bg-slate-800:hover,
+.theme-navy-white button.bg-zinc-900:hover,
+.theme-navy-white button.bg-slate-900:hover {
+  background-color: #132C4F !important;
+  color: #FFFFFF !important;
+}
+
+/* Secondary Button Highlights */
+.theme-navy-white .hover\:bg-zinc-200:hover {
+  background-color: #E2E8F0 !important;
+}
+
+.theme-navy-white .hover\:bg-zinc-100:hover {
+  background-color: #F1F5F9 !important;
+}
+
+.theme-navy-white .hover\:bg-zinc-50:hover {
+  background-color: #F8FAFC !important;
+}
+
+/* Active Nav & Highlight Accent (Royal Blue #2563EB) */
+.theme-navy-white .bg-blue-600 {
+  background-color: #2563EB !important;
+}
+
+.theme-navy-white .hover\:bg-blue-700:hover {
+  background-color: #1D4ED8 !important;
+}
+
+.theme-navy-white .text-blue-600,
+.theme-navy-white .text-blue-700 {
+  color: #2563EB !important;
+}
+
+.theme-navy-white .border-blue-600 {
+  border-color: #2563EB !important;
+}
+
+/* Academic Timetable Soft Sky Blue Pills */
+.theme-navy-white .bg-sky-100,
+.theme-navy-white .bg-blue-50 {
+  background-color: #E0F2FE !important;
+  color: #0369A1 !important;
+  border-color: #BAE6FD !important;
+}
+
+/* Data Tables Across All Pages */
+.theme-navy-white table thead tr,
+.theme-navy-white table th {
+  background-color: #F8FAFC !important;
+  color: #0A192F !important;
+  border-color: #E2E8F0 !important;
+}
+
+.theme-navy-white table tbody tr {
+  border-color: #F1F5F9 !important;
+}
+
+.theme-navy-white table tbody tr:hover {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+
+/* Form Inputs, Selects, & Textareas */
+.theme-navy-white input:not([type="checkbox"]):not([type="radio"]),
+.theme-navy-white select,
+.theme-navy-white textarea {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0A192F !important;
+}
+
+.theme-navy-white input:focus,
+.theme-navy-white select:focus,
+.theme-navy-white textarea:focus {
+  border-color: #2563EB !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Modals & Dialog Backdrop */
+.theme-navy-white .bg-zinc-900\/60,
+.theme-navy-white .bg-black\/60 {
+  background-color: rgba(10, 25, 47, 0.75) !important;
+}
+
+/* Modal Inner Container */
+.theme-navy-white .bg-white.rounded-2xl {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 20px 25px -5px rgba(10, 25, 47, 0.1), 0 8px 10px -6px rgba(10, 25, 47, 0.1) !important;
+}
+
+/* Status Chips & Metrics */
+.theme-navy-white .text-emerald-600 {
+  color: #10B981 !important;
+}
+.theme-navy-white .bg-emerald-500 {
+  background-color: #10B981 !important;
+}
+.theme-navy-white .bg-amber-500 {
+  background-color: #F59E0B !important;
+}
+.theme-navy-white .text-amber-600 {
+  color: #D97706 !important;
+}
+.theme-navy-white .bg-red-600 {
+  background-color: #EF4444 !important;
+}
+.theme-navy-white .text-red-600 {
+  color: #DC2626 !important;
+}
