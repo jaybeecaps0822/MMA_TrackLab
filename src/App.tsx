@@ -50,6 +50,8 @@ import { LiveAttendanceView } from './components/LiveAttendanceView';
 import { MaintenanceView } from './components/MaintenanceView';
 import { LabManagementView } from './components/LabManagementView';
 import { TrainerManagementView } from './components/TrainerManagementView';
+import { SectionsManagementView } from './components/SectionsManagementView';
+import { SubjectsManagementView } from './components/SubjectsManagementView';
 import { UserManagementView } from './components/UserManagementView';
 import { ReportsView } from './components/ReportsView';
 import { AnalyticsView } from './components/AnalyticsView';
@@ -88,7 +90,7 @@ import {
   ShieldAlert,
   Palette
 } from 'lucide-react';
-import heroLabImage from './assets/images/mma_actual_laboratory.jpg';
+import heroLabImage from './assets/images/hero_ict_laboratory_1790661991315.jpg';
 import schoolSealImage from './assets/images/mma_school_seal.png';
 import { SplashScreen } from './components/SplashScreen';
 import { ThemePreviewModal } from './components/ThemePreviewModal';
@@ -214,6 +216,20 @@ export default function App() {
     return new URLSearchParams(window.location.search).get('printView') === 'true';
   }, []);
 
+  // Validate Connection to Firestore on boot
+  useEffect(() => {
+    async function testConnection() {
+      try {
+        await getDocFromServer(doc(db, 'test', 'connection'));
+      } catch (error) {
+        if (error instanceof Error && error.message.includes('the client is offline')) {
+          console.error('Please check your Firebase configuration.');
+        }
+      }
+    }
+    testConnection();
+  }, []);
+
   // Auth Listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -224,7 +240,10 @@ export default function App() {
           if (userDoc.exists()) {
             const data = userDoc.data() as UserProfile;
             // Bootstrap admin if email matches
-            if (currentUser.email === 'jaybeecapoy0822@gmail.com' && data.role !== 'admin') {
+            const isBootstrappedAdmin =
+              currentUser.email === 'kdaveepong@gmail.com' ||
+              currentUser.email === 'jaybeecapoy0822@gmail.com';
+            if (isBootstrappedAdmin && data.role !== 'admin') {
               const updatedProfile = { ...data, role: 'admin' as const };
               await setDoc(doc(db, 'users', currentUser.uid), updatedProfile);
               setProfile(updatedProfile);
@@ -232,7 +251,9 @@ export default function App() {
               setProfile(data);
             }
           } else {
-            const isAdmin = currentUser.email === 'jaybeecapoy0822@gmail.com';
+            const isAdmin =
+              currentUser.email === 'kdaveepong@gmail.com' ||
+              currentUser.email === 'jaybeecapoy0822@gmail.com';
             const newProfile: UserProfile = {
               uid: currentUser.uid,
               displayName: currentUser.displayName || 'Authorized User',
@@ -1535,6 +1556,9 @@ export default function App() {
         openIssuesCount={openIssuesCount}
         activeAcCount={acSessions.filter(s => s.status === 'active').length}
         pendingBorrowCount={borrowRequests.filter(r => r.status === 'pending').length}
+        trainersCount={trainers.length}
+        sectionsCount={sections.length}
+        subjectsCount={subjects.length}
         isOpenMobile={isMobileSidebarOpen}
         onCloseMobile={() => setIsMobileSidebarOpen(false)}
         isCollapsed={isSidebarCollapsed}
@@ -1736,8 +1760,6 @@ export default function App() {
           {activeTab === 'trainers' && (
             <TrainerManagementView
               trainers={trainers}
-              sections={sections}
-              subjects={subjects}
               schedules={schedules}
               laboratories={laboratories}
               profile={profile}
@@ -1749,14 +1771,32 @@ export default function App() {
                 setActiveTab('schedule');
               }}
               onOpenPrintModal={(mode, targetId) => setPrintScheduleModal({ isOpen: true, mode: mode || 'faculty', targetId })}
+            />
+          )}
+
+          {activeTab === 'sections' && (
+            <SectionsManagementView
+              sections={sections}
+              schedules={schedules}
+              profile={profile}
               onAddSection={() => setSectionModal({ isOpen: true, section: null })}
               onEditSection={(section) => setSectionModal({ isOpen: true, section })}
               onDeleteSection={handleDeleteSection}
               onSeedSampleSections={handleSeedSampleSections}
+              onOpenTimetable={() => setActiveTab('schedule')}
+            />
+          )}
+
+          {activeTab === 'subjects' && (
+            <SubjectsManagementView
+              subjects={subjects}
+              schedules={schedules}
+              profile={profile}
               onAddSubject={() => setSubjectModal({ isOpen: true, subject: null })}
               onEditSubject={(subject) => setSubjectModal({ isOpen: true, subject })}
               onDeleteSubject={handleDeleteSubject}
               onSeedSampleSubjects={handleSeedSampleSubjects}
+              onOpenTimetable={() => setActiveTab('schedule')}
             />
           )}
 

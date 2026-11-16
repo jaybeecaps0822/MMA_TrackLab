@@ -179,4 +179,4 @@ export interface BorrowRequest {
   returnNotes?: string | null;
 }
 
-export type ActiveTab = 'floorplan' | 'schedule' | 'attendance' | 'aircon' | 'items' | 'maintenance' | 'labs' | 'trainers' | 'analytics' | 'reports' | 'users' | 'kiosk';
+export type ActiveTab = 'floorplan' | 'schedule' | 'attendance' | 'aircon' | 'items' | 'maintenance' | 'labs' | 'trainers' | 'sections' | 'subjects' | 'analytics' | 'reports' | 'users' | 'kiosk';

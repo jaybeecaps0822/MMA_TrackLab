@@ -114,7 +114,7 @@ export const ItemBorrowingView: React.FC<ItemBorrowingViewProps> = ({
     }
   }, [initialSelectedItemId, items]);
 
-  const isStaff = profile?.role === 'admin' || profile?.role === 'teacher' || profile?.email === 'jaybeecapoy0822@gmail.com';
+  const isStaff = profile?.role === 'admin' || profile?.role === 'teacher' || profile?.email === 'kdaveepong@gmail.com' || profile?.email === 'jaybeecapoy0822@gmail.com';
 
   // Derived statistics
   const stats = useMemo(() => {

@@ -26,7 +26,9 @@ import {
   CheckCircle2,
   MapPin,
   Laptop,
-  LayoutGrid
+  LayoutGrid,
+  BookOpen,
+  Building2
 } from 'lucide-react';
 import { differenceInMinutes, format } from 'date-fns';
 import { SchoolComputerLogo } from './SchoolComputerLogo';
@@ -43,6 +45,9 @@ interface SidebarProps {
   openIssuesCount?: number;
   activeAcCount?: number;
   pendingBorrowCount?: number;
+  trainersCount?: number;
+  sectionsCount?: number;
+  subjectsCount?: number;
   isOpenMobile: boolean;
   onCloseMobile: () => void;
   isCollapsed: boolean;
@@ -64,6 +69,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   openIssuesCount = 0,
   activeAcCount = 0,
   pendingBorrowCount = 0,
+  trainersCount,
+  sectionsCount,
+  subjectsCount,
   isOpenMobile,
   onCloseMobile,
   isCollapsed,
@@ -147,19 +155,40 @@ export const Sidebar: React.FC<SidebarProps> = ({
       ],
     },
     {
+      group: 'ACADEMICS & DIRECTORY',
+      items: [
+        {
+          id: 'trainers' as ActiveTab,
+          label: 'Faculty',
+          icon: GraduationCap,
+          count: trainersCount && trainersCount > 0 ? trainersCount : undefined,
+          countColor: 'bg-[#1A3860] text-blue-100',
+        },
+        {
+          id: 'sections' as ActiveTab,
+          label: 'Sections',
+          icon: Layers,
+          count: sectionsCount && sectionsCount > 0 ? sectionsCount : undefined,
+          countColor: 'bg-[#1A3860] text-blue-100',
+        },
+        {
+          id: 'subjects' as ActiveTab,
+          label: 'Subjects',
+          icon: BookOpen,
+          count: subjectsCount && subjectsCount > 0 ? subjectsCount : undefined,
+          countColor: 'bg-[#1A3860] text-blue-100',
+        },
+      ],
+    },
+    {
       group: 'LABORATORIES & INSIGHTS',
       items: [
         {
           id: 'labs' as ActiveTab,
           label: 'Laboratory Rooms',
-          icon: Layers,
+          icon: Building2,
           badge: hasCapacityWarning ? '!' : undefined,
           badgeColor: 'bg-red-500 text-white font-bold',
-        },
-        {
-          id: 'trainers' as ActiveTab,
-          label: 'Faculty, Sections & Subjects',
-          icon: GraduationCap,
         },
         {
           id: 'analytics' as ActiveTab,

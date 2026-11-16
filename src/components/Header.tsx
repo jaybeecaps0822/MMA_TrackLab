@@ -112,8 +112,16 @@ export const Header: React.FC<HeaderProps> = ({
       subtitle: 'Room capacity limits, configurations, and quick actions',
     },
     trainers: {
-      title: 'Faculty, Sections & Subjects Directory',
-      subtitle: 'Manage faculty members, academic class sections, and curriculum subjects',
+      title: 'Faculty & Instructors',
+      subtitle: 'Manage faculty members, photo ID badges, and teaching loads',
+    },
+    sections: {
+      title: 'Academic Sections',
+      subtitle: 'Manage student cohorts, advisers, headcounts, and designated labs',
+    },
+    subjects: {
+      title: 'Curriculum Subjects',
+      subtitle: 'Manage course codes, classifications, units, and contact hours',
     },
     analytics: {
       title: 'Utilization & Peak Hours Analytics',
